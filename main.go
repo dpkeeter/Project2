@@ -3,14 +3,15 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/dpkeeter/Project2/Project2/builtins"
 	"io"
 	"os"
 	"os/exec"
 	"os/user"
 	"strings"
-
-	"github.com/jh125486/CSCE4600/Project2/builtins"
 )
+
+var currenthistory []string
 
 func main() {
 	exit := make(chan struct{}, 2) // buffer this so there's no deadlock.
@@ -69,11 +70,14 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 
 	// Split the input separate the command name and the command arguments.
 	args := strings.Split(input, " ")
+	currenthistory = append(currenthistory, args...)
 	name, args := args[0], args[1:]
 
 	// Check for built-in commands.
 	// New builtin commands should be added here. Eventually this should be refactored to its own func.
 	switch name {
+	case "history":
+		return builtins.History(currenthistory, name, args...)
 	case "cd":
 		return builtins.ChangeDirectory(args...)
 	case "env":
