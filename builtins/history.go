@@ -10,7 +10,9 @@ func History(currenthistory []string, name string, args ...string) error {
 		return fmt.Errorf("%w: INCORRECT NUMBER OF ARGS", ErrInvalidArgCount)
 	}
 	if len(args) == 0 {
-		fmt.Println("Print History Here")
+		for _, command := range currenthistory {
+			fmt.Println(command)
+		}
 		return nil
 	}
 	var arg = args[0]
