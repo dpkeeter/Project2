@@ -1,9 +1,9 @@
 package main
 
 import (
-	"Project2/builtins"
 	"bufio"
 	"fmt"
+	"github.com/dpkeeter/Project2/Project2/builtins"
 	"io"
 	"os"
 	"os/exec"
