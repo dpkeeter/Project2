@@ -1,4 +1,4 @@
-//currently expects syntax: cat [filename]
+//currently expects either syntax as "cat [filename]" or "cat"
 
 package builtins
 
@@ -9,9 +9,9 @@ import (
 )
 
 func Cat(userArgs ...string) {
-
 	args := userArgs
 
+	//file input case.
 	if len(args) > 0 {
 		//data, err := os.Open(file)
 		file, err := os.Open(args[0])
@@ -40,7 +40,12 @@ func Cat(userArgs ...string) {
 		}
 
 	} else {
-		fmt.Println("$ too few arguments, expected:  cat [filename]")
+		//otherwise, echoes back user input (only does this once).
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		input := scanner.Text()
+		fmt.Println(input)
+
 		return
 	}
 	return
