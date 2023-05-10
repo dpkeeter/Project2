@@ -77,7 +77,9 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 	// New builtin commands should be added here. Eventually this should be refactored to its own func.
 	switch name {
 	case "history":
-		return builtins.History(currenthistory, name, args...)
+		histerr, hist := builtins.History(currenthistory, name, args...)
+		currenthistory = hist
+		return histerr
 	case "cd":
 		return builtins.ChangeDirectory(args...)
 	case "env":
