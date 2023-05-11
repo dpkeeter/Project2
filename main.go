@@ -1,9 +1,9 @@
 package main
 
 import (
+	"Project2/builtins"
 	"bufio"
 	"fmt"
-	"github.com/dpkeeter/Project2/Project2/builtins"
 	"io"
 	"os"
 	"os/exec"
@@ -88,6 +88,9 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 		return builtins.EnvironmentVariables(w, args...)
 	case "cat":
 		builtins.Cat(args...)
+		return nil
+	case "echo":
+		builtins.Echo(args...)
 		return nil
 	case "exit":
 		exit <- struct{}{}
