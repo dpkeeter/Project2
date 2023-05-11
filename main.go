@@ -79,7 +79,7 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 	case "pwd":
 		return builtins.PrintWorkingDirectory(w, args...)
 	case "history":
-		histerr, hist := builtins.History(currenthistory, name, args...)
+		histerr, hist := builtins.History(currenthistory, args...)
 		currenthistory = hist
 		return histerr
 	case "cd":

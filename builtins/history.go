@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func History(currenthistory []string, name string, args ...string) (error, []string) {
+func History(currenthistory []string, args ...string) (error, []string) {
 
 	if len(args) > 1 {
 		return fmt.Errorf("%w: INCORRECT NUMBER OF ARGS", ErrInvalidArgCount), currenthistory
@@ -28,12 +28,9 @@ func History(currenthistory []string, name string, args ...string) (error, []str
 		currenthistory = nil
 		return nil, currenthistory
 	case "-r":
-		temp := currenthistory
-		for i, j := 0, len(temp)-1; i < j; i, j = i+1, j-1 {
-			temp[i], temp[j] = temp[j], temp[i]
-		}
-		for i := 0; i < len(temp); i++ {
-			fmt.Println("Event [", i, "]", temp[i])
+
+		for i := len(currenthistory) - 1; i >= 0; i-- {
+			fmt.Println("Event [", i, "]", currenthistory[i])
 		}
 		return nil, currenthistory
 	}
