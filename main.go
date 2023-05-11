@@ -92,6 +92,8 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 	case "echo":
 		builtins.Echo(args...)
 		return nil
+	case "times":
+		return builtins.Times()
 	case "exit":
 		exit <- struct{}{}
 		return nil
